@@ -14,7 +14,7 @@ find_package(Qt6 COMPONENTS
   Widgets
   REQUIRED)
 
-add_executable(TagScopeXML main.cpp
+add_executable(TagScopeXML WIN32 main.cpp
         MainWindow/MainWindow.cpp
         MainWindow/MainWindow.h)
 target_link_libraries(TagScopeXML
@@ -22,7 +22,9 @@ target_link_libraries(TagScopeXML
   Qt::Gui
   Qt::Widgets Qt::Xml
 )
-
+if(WIN32)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mwindows")
+endif()
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(DEBUG_SUFFIX)
     if (MSVC AND CMAKE_BUILD_TYPE MATCHES "Debug")
